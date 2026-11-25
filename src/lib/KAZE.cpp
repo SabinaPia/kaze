@@ -284,13 +284,13 @@ void KAZE::Determinant_Hessian_Parallel(std::vector<cv::KeyPoint>& kpts) {
   vector<cv::KeyPoint> aux;
 
   // Allocate memory for the vector of vectors
-  for (size_t i = 1; i < evolution_.size()-1; i++)
+  for (int i = 1; i < (int)evolution_.size()-1; i++)
     kpts_par_.push_back(aux);
 
 #ifdef _OPENMP
 #pragma omp parallel for
 #endif
-  for (size_t i = 1; i < evolution_.size()-1; i++)
+  for (int i = 1; i < (int)evolution_.size()-1; i++)
     Find_Extremum_Threading(i);
 
   // Now fill the vector of keypoints!!!
